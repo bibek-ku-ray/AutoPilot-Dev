@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI-Powered Development Platform
 
-## Getting Started
+An **AI-powered development platform** designed to help developers **build, experiment, and ship applications faster** using intelligent automation, secure sandboxed environments, and scalable background processing.
 
-First, run the development server:
+This platform combines modern frontend tooling with robust backend infrastructure and AI agents to deliver a seamless developer experience—from idea to production.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-  **AI-assisted development** powered by Google Gemini
+-  **Secure sandboxed execution** using E2B
+-  **Scalable background jobs & workflows** with Inngest
+-  **AI agents orchestration** using Inngest Agent Kit
+-  **Authentication & billing** via Clerk + Clerk Billing
+-  **Efficient data fetching & routing** with TanStack Query & Router
+-  **Modern UI system** using shadcn/ui and Tailwind CSS
+-  **Type-safe database access** with Prisma ORM
+-  **PostgreSQL database** for reliability and scalability
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend
+- **Next.js**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **TanStack Query**
+- **TanStack Router**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Authentication & Billing
+- **Clerk**
+- **Clerk Billing**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Backend & Infrastructure
+- **Inngest** – Background jobs, workflows, and event-driven logic
+- **Inngest Agent Kit** – AI agent orchestration
+- **E2B** – Secure, sandboxed execution environments
+- **Prisma** – Type-safe ORM
+- **PostgreSQL** – Relational database
 
-## Deploy on Vercel
+### AI
+- **Google Gemini AI** 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture Overview
+
+- **Frontend (Next.js)** handles UI, routing, and client-side state
+- **Clerk** manages authentication and billing
+- **Inngest** orchestrates background jobs, AI workflows, and async tasks
+- **E2B sandboxes** safely execute untrusted or experimental code
+- **Prisma + PostgreSQL** persist application data
+- **Google Gemini AI** powers intelligent features and agent reasoning
+
+---
+
+## Use Cases
+
+- AI-assisted code generation and analysis
+- Secure execution of user-submitted code
+- Long-running or async AI workflows
+- Developer productivity tools
+- SaaS platforms with usage-based billing
+- Internal engineering automation
+
