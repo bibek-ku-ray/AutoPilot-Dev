@@ -1,5 +1,6 @@
-import Navbar from "@/components/nav-bar";
+
 import { onBoardUser } from "@/modules/actions";
+import Navbar from "@/modules/home/components/nav-bar";
 import { ReactNode } from "react";
 
 export default async function AuthLayout({
