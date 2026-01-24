@@ -1,5 +1,16 @@
+import Navbar from "@/components/nav-bar";
+import { onBoardUser } from "@/modules/actions";
 import { ReactNode } from "react";
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
-  return <div className="h-screen flex justify-center items-center">{children}</div>;
+export default async function AuthLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  await onBoardUser();
+  return (
+    <div className="">
+      <Navbar/>
+      {children}</div>
+  );
 }
