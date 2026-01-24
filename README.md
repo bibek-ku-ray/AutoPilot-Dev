@@ -2,7 +2,7 @@
 
 An **AI-powered development platform** designed to help developers **build, experiment, and ship applications faster** using intelligent automation, secure sandboxed environments, and scalable background processing.
 
-This platform combines modern frontend tooling with robust backend infrastructure and AI agents to deliver a seamless developer experience—from idea to production.
+This platform combines modern frontend tooling with robust backend infrastructure and AI agents to deliver a seamless developer experience from idea to production.
 
 ---
 
@@ -56,12 +56,5 @@ This platform combines modern frontend tooling with robust backend infrastructur
 
 ---
 
-## Use Cases
-
-- AI-assisted code generation and analysis
-- Secure execution of user-submitted code
-- Long-running or async AI workflows
-- Developer productivity tools
-- SaaS platforms with usage-based billing
-- Internal engineering automation
+# System Design
 
