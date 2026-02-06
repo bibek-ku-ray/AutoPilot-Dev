@@ -2,6 +2,7 @@
 
 import { PrismaClientKnownRequestError } from "@/app/generated/prisma/internal/prismaNamespace";
 import prisma from "@/lib/prisma";
+import { consumeCredit } from "@/lib/usage";
 import { currentUser } from "@clerk/nextjs/server";
 
 export const onBoardUser = async () => {
@@ -92,7 +93,6 @@ export const getCurrentUser = async () => {
       },
     });
     return dbUser;
-    
   } catch (error) {
     console.error(`ERR getCurrentUser ${error}`);
 
@@ -113,4 +113,27 @@ export const getCurrentUser = async () => {
       error: "Unexpected error occurred.",
     };
   }
+};
+
+export const createProject = async (value: string) => {
+  const user = await getCurrentUser();
+  if (!user) throw new Error("Unauthorized");
+
+  try {
+    await consumeCredit();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Something went wrong: " + error.message);
+    } else {
+      throw new Error("Too many requests");
+    }
+  }
+
+  // TODO: implement prisma and inngest
+  // For now, return a mock project object
+  return {
+    id: "temp-id-" + Date.now(),
+    content: value,
+    createdAt: new Date(),
+  };
 };
