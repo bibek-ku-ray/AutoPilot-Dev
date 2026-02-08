@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import TextAreaAutosize from "react-textarea-autosize";
 import { cn } from "@/lib/utils";
+import { onInvoke } from "../actions";
 
 const formSchema = z.object({
   content: z
@@ -71,6 +72,16 @@ const PROJECT_TEMPLATES = [
   },
 ];
 
+const onInvokeAI = async()=>{
+  try {
+    const res = await onInvoke()
+    console.log(res)
+    toast.success("DONE!")
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const ProjectForm = () => {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
@@ -108,6 +119,7 @@ const ProjectForm = () => {
 
   return (
     <div className="space-y-8">
+      <Button onClick={()=> onInvokeAI()}>Inngest</Button>
       {/* Templates Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {PROJECT_TEMPLATES.map((template, index) => (
