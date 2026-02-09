@@ -1,5 +1,5 @@
 import { inngest } from "./client";
-import { createAgent, gemini } from "@inngest/agent-kit";
+import { createAgent, openai } from "@inngest/agent-kit";
 
 export const helloWorld = inngest.createFunction(
   {
@@ -10,18 +10,38 @@ export const helloWorld = inngest.createFunction(
     },
   },
   { event: "agent/hello" },
-  async ({ event, step }) => {
+
+  async () => {
     const helloAgent = createAgent({
       name: "hello-agent",
-      description: "A simple agent that say hello",
-      system: "You are a helpful assistant. Alway greet with enthusiasm",
-      model: gemini({ model: "gemini-2.0-flash" }),
+      description: "A simple agent that says hello",
+      system: "You are a helpful assistant. Always greet with enthusiasm.",
+      model: openai({
+        model: "openai/gpt-4o-mini",
+        apiKey: process.env.OPENROUTER_API_KEY,
+        baseUrl: process.env.OPENROUTER_BASE_URL,
+      }),
     });
 
-    const { output } = await helloAgent.run("Say Hello to user!");
+    const { output } = await helloAgent.run("Say hello to Bibek 👋");
 
     return {
-      message: output[0].content,
+      message: output,
     };
   },
+
+  // async ({ event, step }) => {
+  //   const helloAgent = createAgent({
+  //     name: "hello-agent",
+  //     description: "A simple agent that say hello",
+  //     system: "You are a helpful assistant. Alway greet with enthusiasm",
+  //     model: gemini({ model: "gemini-2.0-flash" }),
+  //   });
+
+  //   const { output } = await helloAgent.run("Say Hello to user!");
+
+  //   return {
+  //     message: output[0].content,
+  //   };
+  // },
 );
