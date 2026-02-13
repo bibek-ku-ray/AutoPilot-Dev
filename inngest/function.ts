@@ -1,5 +1,6 @@
 import { inngest } from "./client";
 import { createAgent, openai } from "@inngest/agent-kit";
+import { Sandbox } from "@e2b/code-interpreter";
 
 export const helloWorld = inngest.createFunction(
   {
@@ -11,7 +12,14 @@ export const helloWorld = inngest.createFunction(
   },
   { event: "agent/hello" },
 
-  async () => {
+  async ({ step }) => {
+    const sandboxId = await step.run("generate-sandbox-id", async () => {
+      const sandbox = await Sandbox.create("devbibek25/autopilot-dev", {
+        apiKey: process.env.E2B_API_KEY,
+      });
+      return sandbox.sandboxId;
+    });
+
     const helloAgent = createAgent({
       name: "hello-agent",
       description: "A simple agent that says hello",
@@ -25,23 +33,17 @@ export const helloWorld = inngest.createFunction(
 
     const { output } = await helloAgent.run("Say hello to Bibek 👋");
 
+    const sandboxUrl = await step.run("generate-sandbox-url", async () => {
+      const sandbox = await Sandbox.connect(sandboxId, {
+        apiKey: process.env.E2B_API_KEY,
+      });
+      const host = sandbox.getHost(3000);
+      return `http://${host}`;
+    });
+
     return {
       message: output,
+      sandboxUrl,
     };
   },
-
-  // async ({ event, step }) => {
-  //   const helloAgent = createAgent({
-  //     name: "hello-agent",
-  //     description: "A simple agent that say hello",
-  //     system: "You are a helpful assistant. Alway greet with enthusiasm",
-  //     model: gemini({ model: "gemini-2.0-flash" }),
-  //   });
-
-  //   const { output } = await helloAgent.run("Say Hello to user!");
-
-  //   return {
-  //     message: output[0].content,
-  //   };
-  // },
 );
