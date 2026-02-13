@@ -1,15 +1,29 @@
 FROM node:21-slim
 
-RUN apt-get update && apt-get install -y curl && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl git && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY compile_page.sh /compile_page.sh
 RUN chmod +x /compile_page.sh
 
-WORKDIR /home/user/autopilot-dev
+WORKDIR /home/user
 
-RUN npx --yes create-next-app@16.1.4 . --yes
+# Install Next.js with minimal setup
+RUN npx --yes create-next-app@latest nextjs-app --typescript --tailwind --app --no-src-dir --import-alias "@/*" --yes
 
-RUN npx --y shadcn@3.7.0 init --yes --style radix-maia --base-color zinc --force
-RUN npx --yes shadcn@3.7.0 add --all --yes
+# Install shadcn with default settings
+WORKDIR /home/user/nextjs-app
+RUN npx --yes shadcn@latest init -d
 
-RUN mv /home/user/autopilot-dev/* /home/user/ && rm -rf /home/user/autopilot-dev
+# Install essential shadcn components one by one to avoid conflicts
+RUN npx --yes shadcn@latest add button
+RUN npx --yes shadcn@latest add input
+RUN npx --yes shadcn@latest add card
+RUN npx --yes shadcn@latest add label
+RUN npx --yes shadcn@latest add textarea
+RUN npx --yes shadcn@latest add select
+RUN npx --yes shadcn@latest add dialog
+RUN npx --yes shadcn@latest add form
+
+# Move everything to /home/user for easy access
+WORKDIR /home/user
+RUN mv /home/user/nextjs-app/* /home/user/ && rm -rf /home/user/nextjs-app
